@@ -1,0 +1,40 @@
+version: '3.8'
+networks:
+    diamond_game_network:
+services:
+    http-gateway:
+        build: ./be/http-gateway
+        container_name: http
+        volumes:
+            - ./be/http-gateway/src:/usr/src/app/src
+        ports:
+            - 8081:8081
+        depends_on:
+            - game-service
+        command: npm run start:dev
+        networks:
+            - diamond_game_network
+    socket-gateway:
+        build: ./be/socket-gateway
+        container_name: socket
+        volumes:
+            - ./be/socket-gateway/src:/usr/src/app/src
+        ports:
+            - 8082:8082
+        depends_on:
+            - game-service
+        command: npm run start:dev
+        networks:
+            - diamond_game_network
+    game-service:
+        build: ./be/game-service
+        container_name: game
+        volumes:
+            - ./be/game-service/src:/usr/src/app/src
+        ports:
+            - 8083:8083
+        command:
+                npm run start:dev
+        restart: always
+        networks:
+            - diamond_game_network
