@@ -4,13 +4,13 @@ import { GameService } from './diamonds-game/diamonds-game.service';
 import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [
-    GameModule,
-    ConfigModule.forRoot({
-      isGlobal: true,
-    }),
-  ],
-  controllers: [],
-  providers: [GameService],
+	imports: [
+		GameModule,
+		ConfigModule.forRoot({
+			isGlobal: true,
+		}),
+	],
+	controllers: [],
+	providers: [GameService],
 })
 export class AppModule {}

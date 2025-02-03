@@ -17,7 +17,7 @@ export class GameService {
 	private diamondsCoordinates: number[][];
 
 	private fieldGenerate(data: InitialGameSettings): void {
-		const { fieldSize, diamondsCount } = data;
+		const { fieldSize } = data;
 		this.gameField = Array.from({ length: fieldSize }, () =>
 			Array(fieldSize).fill(0),
 		);
@@ -63,7 +63,9 @@ export class GameService {
 		return [...coordinates].map((point) => point.split(',').map(Number));
 	}
 
-	public async startGame(data: InitialGameSettings): Promise<(number | '*')[][]> {
+	public async startGame(
+		data: InitialGameSettings,
+	): Promise<(number | '*')[][]> {
 		try {
 			this.fieldGenerate(data);
 			console.log({ FIELD: this.gameField });
